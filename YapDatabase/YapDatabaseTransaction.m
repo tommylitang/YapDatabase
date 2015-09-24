@@ -4898,21 +4898,21 @@
 	
 	// UPDATE "database2" SET "metadata" = ? WHERE "rowid" = ?;
 	
-	int const bind_idx_metadata = SQLITE_BIND_START + 0;
-	int const bind_idx_rowid    = SQLITE_BIND_START + 1;
-	
-	sqlite3_bind_blob(statement, bind_idx_metadata,
-	                  serializedMetadata.bytes, (int)serializedMetadata.length, SQLITE_STATIC);
-	
-	sqlite3_bind_int64(statement, bind_idx_rowid, rowid);
-	
-	BOOL updated = YES;
-	
     YapCollectionKey *cacheKey = [[YapCollectionKey alloc] initWithCollection:collection key:key];
     for (YapDatabaseExtensionTransaction *extTransaction in [self orderedExtensions])
     {
         [extTransaction handleWillReplaceMetadata:metadata forCollectionKey:cacheKey withRowid:rowid];
     }
+    
+    int const bind_idx_metadata = SQLITE_BIND_START + 0;
+    int const bind_idx_rowid    = SQLITE_BIND_START + 1;
+    
+    sqlite3_bind_blob(statement, bind_idx_metadata,
+                      serializedMetadata.bytes, (int)serializedMetadata.length, SQLITE_STATIC);
+    
+    sqlite3_bind_int64(statement, bind_idx_rowid, rowid);
+    
+    BOOL updated = YES;
 
 	int status = sqlite3_step(statement);
 	if (status != SQLITE_DONE)
@@ -5040,20 +5040,20 @@
 	sqlite3_stmt *statement = [connection removeForRowidStatement];
 	if (statement == NULL) return;
 	
-	// DELETE FROM "database" WHERE "rowid" = ?;
-	
-	int const bind_idx_rowid = SQLITE_BIND_START;
-	
-	sqlite3_bind_int64(statement, bind_idx_rowid, rowid);
-	
-	BOOL removed = YES;
-	
     YapCollectionKey *cacheKey = [[YapCollectionKey alloc] initWithCollection:collection key:key];
     for (YapDatabaseExtensionTransaction *extTransaction in [self orderedExtensions])
     {
         [extTransaction handleWillRemoveObjectForCollectionKey:cacheKey withRowid:rowid];
     }
-
+    
+    // DELETE FROM "database" WHERE "rowid" = ?;
+    
+    int const bind_idx_rowid = SQLITE_BIND_START;
+    
+    sqlite3_bind_int64(statement, bind_idx_rowid, rowid);
+    
+    BOOL removed = YES;
+    
 	int status = sqlite3_step(statement);
 	if (status != SQLITE_DONE)
 	{
