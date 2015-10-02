@@ -1090,7 +1090,7 @@ static NSString *const ext_key_query             = @"query";
 		__unsafe_unretained YapDatabaseViewTransaction *parentViewTransaction =
 		  [databaseTransaction ext:searchResultsView->parentViewName];
 		
-		group = [parentViewTransaction groupForKey:key inCollection:collection];
+		group = [parentViewTransaction groupForKey:collectionKey.key inCollection:collectionKey.collection];
 		
 		if (group)
 		{
@@ -1226,7 +1226,7 @@ static NSString *const ext_key_query             = @"query";
 		__unsafe_unretained YapDatabaseViewTransaction *parentViewTransaction =
 		  [databaseTransaction ext:searchResultsView->parentViewName];
 		
-		group = [parentViewTransaction groupForKey:key inCollection:collection];
+		group = [parentViewTransaction groupForKey:collectionKey.key inCollection:collectionKey.collection];
 		
 		if (group)
 		{
@@ -1376,7 +1376,7 @@ static NSString *const ext_key_query             = @"query";
 		__unsafe_unretained YapDatabaseViewTransaction *parentViewTransaction =
 		  [databaseTransaction ext:searchResultsView->parentViewName];
 		
-		NSString *group = [parentViewTransaction groupForKey:key inCollection:collection];
+		NSString *group = [parentViewTransaction groupForKey:collectionKey.key inCollection:collectionKey.collection];
 		
 		if (group)
 		{
@@ -1687,7 +1687,7 @@ static NSString *const ext_key_query             = @"query";
 		__unsafe_unretained YapDatabaseViewTransaction *parentViewTransaction =
 		  [databaseTransaction ext:searchResultsView->parentViewName];
 		
-		NSString *group = [parentViewTransaction groupForKey:key inCollection:collection];
+		NSString *group = [parentViewTransaction groupForKey:collectionKey.key inCollection:collectionKey.collection];
 		
 		if (group)
 		{
