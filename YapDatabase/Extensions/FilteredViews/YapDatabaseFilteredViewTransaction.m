@@ -765,7 +765,7 @@
 	YapDatabaseViewTransaction *parentViewTransaction =
 	  [databaseTransaction ext:filteredView->parentViewName];
 	
-	NSString *group = parentViewTransaction->lastHandledGroup;
+	NSString *group = [parentViewTransaction groupForKey:key inCollection:collection];
 	
 	if (group == nil)
 	{
@@ -865,7 +865,7 @@
 	YapDatabaseViewTransaction *parentViewTransaction =
 	  [databaseTransaction ext:filteredView->parentViewName];
 	
-	NSString *group = parentViewTransaction->lastHandledGroup;
+	NSString *group = [parentViewTransaction groupForKey:key inCollection:collection];
 	
 	if (group == nil)
 	{
@@ -985,7 +985,7 @@
 	YapDatabaseViewTransaction *parentViewTransaction =
 	  [databaseTransaction ext:filteredView->parentViewName];
 	
-	NSString *group = parentViewTransaction->lastHandledGroup;
+	NSString *group = [parentViewTransaction groupForKey:key inCollection:collection];
 	
 	if (group == nil)
 	{
@@ -1150,7 +1150,7 @@
 	YapDatabaseViewTransaction *parentViewTransaction =
 	  [databaseTransaction ext:filteredView->parentViewName];
 	
-	NSString *group = parentViewTransaction->lastHandledGroup;
+	NSString *group = [parentViewTransaction groupForKey:key inCollection:collection];
 	
 	if (group == nil)
 	{
